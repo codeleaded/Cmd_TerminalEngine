@@ -8,10 +8,10 @@ void Update(TerminalEngine* te){
     if(InputMouse_Get(&te->im,INPUTMOUSE_BUTTON_L).DOWN){
         if(te->im.posX>=0 && te->im.posX<te->tc.width && te->im.posY>=0 && te->im.posY<te->tc.height)
             TerminalCtl_SetPixel(
-                te,
-                (Coord){ te->im.posX,te->im.posY },
+                &te->tc,
+                (Term_Coord){ te->im.posX,te->im.posY },
                 L'A',
-                Color_New(0,0,0,0,0,0)
+                Term_Color_New(0,0,0,0,0,0)
             );
     }
     if(InputKeyboard_Get(&te->ikb,INPUTKEYBOARD_KEY_Q).PRESSED){
@@ -24,7 +24,7 @@ int main() {
     TerminalEngine tc = TerminalEngine_New(120,90);
     TerminalEngine_Start(&tc,Update);
     TerminalEngine_Free(&tc);
-
+    
     return 0;
 }
 
